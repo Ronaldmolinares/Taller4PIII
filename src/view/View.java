@@ -125,5 +125,20 @@ public class View {
         }
         return opcion;
     }
+    
+        public String leerCodigoNumerico() {
+        String input;
+        while (true) {
+            try {
+                input = br.readLine().trim();
+                if (!input.isEmpty() && input.matches("^[0-9]+$")) { // Verifica que la entrada contenga solo números
+                    return input;
+                }
+                System.out.println("Ingrese un valor válido (solo números). Intente nuevamente.");
+            } catch (IOException e) {
+                System.out.println("Error al leer la entrada.");
+            }
+        }
+    }
 
 }

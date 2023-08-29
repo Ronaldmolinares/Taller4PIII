@@ -185,7 +185,7 @@ public class Presenter {
     }
 
     private void modificarProgramaAcademico() {
- /*        view.showMessage("=== Modificar Programa Académico ===");
+         view.showMessage("=== Modificar Programa Académico ===");
 
         if (u.getProgramasAcademicos().isEmpty()) {
             view.showMessage("No hay programas académicos registrados.");
@@ -242,7 +242,7 @@ public class Presenter {
         programaSeleccionado.codigo_SNIES = nuevoCodigoSNIES;
 
         view.showMessage("Programa académico modificado exitosamente.");
-*/
+
     }
 
     private void eliminarProgramaAcademico() {

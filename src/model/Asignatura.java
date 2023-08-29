@@ -9,6 +9,10 @@ public class Asignatura {
     String creditos_asignatura;
     List<Estudiante> lista_estudiantes_asignatura; // Nueva lista para estudiantes matriculados
 
+    
+    public void Lista_estudiantes_asignatura(Estudiante estudiante) {
+        lista_estudiantes_asignatura.add(estudiante);
+    }
     public String getNombre_asignatura() {
         return nombre_asignatura;
     }
@@ -42,16 +46,11 @@ public class Asignatura {
     }
 
     
-    
     public Asignatura(String nombre_asignatura, String codigo_asignatura, String creditos_asignatura) {
         this.nombre_asignatura = nombre_asignatura;
         this.codigo_asignatura = codigo_asignatura;
         this.creditos_asignatura = creditos_asignatura;
         this.lista_estudiantes_asignatura = new ArrayList<>(); // Inicialización de la lista
-    }
-
-    public void Lista_estudiantes_asignatura(Estudiante estudiante) {
-        lista_estudiantes_asignatura.add(estudiante);
     }
 
     @Override

@@ -106,7 +106,6 @@ public class Universidad {
 
     public String eliminarEstudiante(int index) {
         estudiantes.remove(index);
-
         return "Estudiante eliminado satisfactoriamente";
     }
 

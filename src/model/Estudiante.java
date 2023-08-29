@@ -11,13 +11,6 @@ public class Estudiante {
         this.correoElectronico = correoElectronico;
     }
 
-    @Override
-    public String toString() {
-        return "Nombres y Apellidos: " + nombresApellidos +
-                ", Código de Estudiante: " + codigoEstudiante +
-                ", Correo Electrónico: " + correoElectronico;
-    }
-
     public String getNombresApellidos() {
         return nombresApellidos;
     }
@@ -41,6 +34,11 @@ public class Estudiante {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
-    
+        @Override
+    public String toString() {
+        return "Nombres y Apellidos: " + nombresApellidos +
+                ", Código de Estudiante: " + codigoEstudiante +
+                ", Correo Electrónico: " + correoElectronico;
+    }
     
 }
