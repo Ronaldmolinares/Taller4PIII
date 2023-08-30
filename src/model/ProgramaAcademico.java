@@ -80,15 +80,17 @@ public class ProgramaAcademico {
             return "No hay materias creadas";
         }
         String str = "";
+        int i = 0;
         for(Asignatura m: listaMaterias) {
-            str += m.toString() + "\n";
+            str += i + ". " + m.toString(i) + "\n";
+            i++;
         }
         return str;
     }
     
     public String verEstudiantesProgramaAcademico() {
         String str = "";
-        str += "Programa AcadÃ©mico: " + nombrePrograma
+        str += "Programa Académico: " + nombrePrograma
                 + ", Estudiantes Matriculados: " + estudiantesMatriculados.size() + "\n";
         int i = 1;
         for (Estudiante e : estudiantesMatriculados) {

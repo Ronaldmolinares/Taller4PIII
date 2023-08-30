@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;  //manejo de excepciones
 import java.io.InputStreamReader;
+
 /**
  *
  * @author Samir
@@ -12,7 +13,7 @@ public class View {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-     public void showMessage(String message) {
+    public void showMessage(String message) {
         System.out.println(message);
     }
 
@@ -61,7 +62,7 @@ public class View {
         try {
             return Integer.parseInt(readString(message));
         } catch (NumberFormatException e) {
-            showMessage(e.toString());
+            showMessage("Solamente se permiten numeros.");
             return readInt(message);
         }
     }
@@ -80,65 +81,74 @@ public class View {
         }
     }
     
-    public void mostrarMenu() {                         // mostrar opciones menú
-       this.showMessage("=== MENÚ - LISTA ESTUDIANTES PROGRAMACIÓN III ===");
-       this.showMessage("1. Ver estudiantes registrados");
-       this.showMessage("2. Registrar un nuevo estudiante");
-       this.showMessage("3. Modificar registro de estudiante");
-       this.showMessage("4. Eliminar registro de estudiante");
-       this.showMessage("5. Crear programa académico");
-       this.showMessage("6. Modificar programa academico");
-       this.showMessage("7. Eliminar programa académico");
-       this.showMessage("8. Ver programas académicos registrados");
-       this.showMessage("9. Crear asignatura");
-       this.showMessage("10. Modificar asignatura");
-       this.showMessage("11. Eliminar asignatura");
-       this.showMessage("12. Ver asignaturas registradas");
-       this.showMessage("13. Matricular estudiantes en programa");
-       this.showMessage("14. Ver matricula de estudiantes en programa");
-       this.showMessage("15. Eliminar estudiantes matricualados en programa");
-       this.showMessage("16. Matricular estudiantes en asignatura");
-       this.showMessage("17. Ver matricula de estudiantes en asignatura");
-       this.showMessage("18. Eliminar estudiantes matricualados en asignatura");
-       this.showMessage("0. Salir");
+    public void menuEstudiante() {
+        this.showMessage("1. Registrar. ");
+        this.showMessage("2. Matricular. ");
     }
 
-    public int leerOpcion(int max) {                               // método para leer tipo de dato - opción menú
+    public void menuEstudianteResgitro() {
+        this.showMessage("=== LISTA ESTUDIANTES ===");
+        this.showMessage("1. Ver estudiantes registrados");
+        this.showMessage("2. Registrar un nuevo estudiante");
+        this.showMessage("3. Modificar registro de estudiante");
+        this.showMessage("4. Eliminar registro de estudiante");
+        this.showMessage("0. Salir");
+    }
+
+    public void menuEstudianteMatricula() {
+        this.showMessage("1. Matricular estudiantes en programa");
+        this.showMessage("2. Ver matricula de estudiantes en programa");
+        this.showMessage("3. Eliminar estudiantes matricualados en programa");
+        this.showMessage("4. Matricular estudiantes en asignatura");
+        this.showMessage("5. Ver matricula de estudiantes en asignatura");
+        this.showMessage("6. Eliminar estudiantes matricualados en asignatura");
+        this.showMessage("0. Salir");
+    }
+
+    public void menuProgramaAcademico() {
+        this.showMessage("1. Crear programa academico");
+        this.showMessage("2. Modificar programa academico");
+        this.showMessage("3. Eliminar programa acadademico");
+        this.showMessage("4. Ver programas acadademicos registrados");
+        this.showMessage("0. Salir");
+    }
+
+    public void menuAsignaturas() {
+        this.showMessage("1. Crear asignatura");
+        this.showMessage("2. Modificar asignatura");
+        this.showMessage("3. Eliminar asignatura");
+        this.showMessage("4. Ver asignaturas registradas");
+        this.showMessage("0. Salir");
+    }
+
+    public void mostrarMenu() {
+        this.showMessage("=== Bienvenido A la UPTC ===");
+        this.showMessage("1. Estudiantes.");
+        this.showMessage("2. Programa Academico.");
+        this.showMessage("3. Asignaturas");
+        this.showMessage("0. Salir");
+    }
+
+    public int leerOpcion(int max) {
         int opcion;
         while (true) {
             try {
-                System.out.print("Ingrese una opción: ");
+                this.showMessage("Ingrese una opci�n: ");
                 String input = br.readLine().trim();           //para leer la entrada del usuario espacios en blanco adicionales y saltos de línea vacíos
                 if (!input.isEmpty()) {
                     opcion = Integer.parseInt(input);
                     if (opcion >= 0 && opcion <= max) {
                         break;
                     } else {
-                        System.out.println("Opción no válida. Intente nuevamente.");
+                        this.showMessage("Opción no válida. Intente nuevamente.");
                     }
                 } else {
-                    System.out.println("No se permiten campos vacíos. Intente nuevamente.");
+                    this.showMessage("No se permiten campos vacíos. Intente nuevamente.");
                 }
-            } catch (Exception e) {
+            } catch (IOException | NumberFormatException e) {
                 System.out.println("Error: Ingrese un número válido.");
             }
         }
         return opcion;
     }
-    
-        public String leerCodigoNumerico() {
-        String input;
-        while (true) {
-            try {
-                input = br.readLine().trim();
-                if (!input.isEmpty() && input.matches("^[0-9]+$")) { // Verifica que la entrada contenga solo números
-                    return input;
-                }
-                System.out.println("Ingrese un valor válido (solo números). Intente nuevamente.");
-            } catch (IOException e) {
-                System.out.println("Error al leer la entrada.");
-            }
-        }
-    }
-
 }

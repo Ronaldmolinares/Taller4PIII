@@ -50,13 +50,13 @@ public class Asignatura {
         this.nombre_asignatura = nombre_asignatura;
         this.codigo_asignatura = codigo_asignatura;
         this.creditos_asignatura = creditos_asignatura;
-        this.lista_estudiantes_asignatura = new ArrayList<>(); // InicializaciÃ³n de la lista
+        this.lista_estudiantes_asignatura = new ArrayList<>(); // Inicialización de la lista
     }
 
-    @Override
-    public String toString() {
-        return "Nombre: " + nombre_asignatura + 
-                ", CÃ³digo: " + codigo_asignatura+
-                ", CrÃ©ditos Asignatura: " + creditos_asignatura;
+    public String toString(int i) {
+        return "Indice: " + i +
+                "Nombre: " + nombre_asignatura + 
+                ", Código: " + codigo_asignatura+
+                ", Créditos Asignatura: " + creditos_asignatura;
     }
 }
