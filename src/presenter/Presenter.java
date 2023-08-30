@@ -1,6 +1,5 @@
 package presenter;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
@@ -75,9 +74,9 @@ public class Presenter {
                 case 18 ->
                     eliminarEstudianteDeAsignatura();
                 case 0 ->
-                    System.out.println("¡Hasta luego!");
+                    view.showMessage("¡Hasta luego!");
                 default ->
-                    System.out.println("Opción no válida. Intente nuevamente.");
+                    view.showMessage("Opción no válida. Intente nuevamente.");
             }
         } while (opcion != 0);
 
@@ -100,6 +99,17 @@ public class Presenter {
         view.showMessage("Estudiante registrado exitosamente.");
     }
 
+    private void eliminarEstudiante() {
+        view.showMessage("== Eliminar Estudiante ==");
+        if(u.getEstudiantes().isEmpty()) {
+            view.showMessage("No existen estudiantes");
+            return;
+        }
+        view.showMessage(u.verEstudiantesRegistrados());
+        int iEs = view.readIndex("Ingrese el indice del estudiante que desea eliminar: ", u.getEstudiantes().size());
+        view.showMessage(u.eliminarEstudiante(iEs));
+    }
+    
     public void modificarEstudiante() {
         view.showMessage(u.verEstudiantesRegistrados());
 
@@ -162,8 +172,7 @@ public class Presenter {
             return;
         }
 
-        u.verProgramasAcademicos();
-
+        view.showMessage(u.verProgramasAcademicos());
         int indicePrograma = view.readIndex("Ingrese el índice del programa académico en el que desea matricular al estudiante: ", u.getProgramasAcademicos().size());
 
         u.getProgramasAcademicos().get(indicePrograma).getEstudiantesMatriculados().add(u.getEstudiantes().get(indiceEstudiante));
@@ -185,94 +194,44 @@ public class Presenter {
     }
 
     private void modificarProgramaAcademico() {
-         view.showMessage("=== Modificar Programa Académico ===");
+        view.showMessage("=== Modificar Programa Académico ===");
 
         if (u.getProgramasAcademicos().isEmpty()) {
             view.showMessage("No hay programas académicos registrados.");
             return;
         }
         u.verProgramasAcademicos();
-      
+
         int index = view.readIndex("Ingrese el indice del programa que desea modificar: ",
                 u.getEstudiantes().size());
-//Veificar si index == lista
-        ProgramaAcademico programaSeleccionado = u.getProgramasAcademicos().get(index);
-
-        String nuevoNombrePrograma = programaSeleccionado.nombre_programa;
-        String nuevoCodigoSNIES = programaSeleccionado.codigo_SNIES;
-
-        while (true) {
-            System.out.print("Nuevo Nombre del Programa Académico (" + nuevoNombrePrograma + "): ");
-            String input = leerCadenaNoVaciaTextoPunto();
-            if (!input.isEmpty()) {
-                nuevoNombrePrograma = input;
-                break;
-            } else {
-                System.out.println("Ingrese un valor válido (texto y puntos). Intente nuevamente.");
-            }
-        }
-
-        while (true) {
-            System.out.print("Nuevo Código SNIES del programa (" + nuevoCodigoSNIES + "): ");
-            String input = leerCodigoNumerico();
-            boolean codigoSNIESRegistrado = false;
-            if (!input.isEmpty()) {
-                if (!input.equalsIgnoreCase(programaSeleccionado.codigo_SNIES)) {
-                    for (ProgramaAcademico programa : programaAcademico) {
-                        if (programa.codigo_SNIES.equalsIgnoreCase(input)) {
-                            view.showMessage("El programa académico con este código SNIES ya está registrado.");
-                            codigoSNIESRegistrado = true;
-                            break;
-                        }
-                    }
-                    if (!codigoSNIESRegistrado) {
-                        nuevoCodigoSNIES = input;
-                        break;
-                    }
-                } else {
-                    System.out.println("El nuevo código SNIES es igual al actual.");
-                    break;
-                }
-            } else {
-                System.out.println("No se permiten campos vacíos. Intente nuevamente.");
-            }
-        }
-
-        programaSeleccionado.nombre_programa = nuevoNombrePrograma;
-        programaSeleccionado.codigo_SNIES = nuevoCodigoSNIES;
-
-        view.showMessage("Programa académico modificado exitosamente.");
-
+        // falta
     }
 
     private void eliminarProgramaAcademico() {
-
+        view.showMessage("== Eliminar Programa Academico");
+        view.showMessage(u.verProgramasAcademicos());
+        int iPa = view.readIndex("Ingrese el indice del programa academico que desea eliminar: ", u.getProgramasAcademicos().size());
+        
+        u.getProgramasAcademicos().remove(iPa);
+        view.showMessage("Programa Academico eliminado con exito.");
     }
 
     private void crearAsignatura() {
-
         view.showMessage("=== Crear Asignaturas ===");
-        while (true) {
-            String nombresAsignatura = view.readStringText("Nombre Asignatura: ");                //valida tipo dato (solo texto)y entrada no vacía
-            String codigoAsignatura = view.readString("Código Asignatura: ");
-            String creditosAsignatura = view.readString("Creditos Asignatura: ");              //valida tipo dato (tipo correo xxx@.xxx)y entrada no vacía
+        view.showMessage(u.verProgramasAcademicos());
+        int iPa = view.readIndex("Ingrese el indice del programa academico en donde quieres crear la asignatura: ", u.getProgramasAcademicos().size());
+        ProgramaAcademico pa = u.getProgramasAcademicos().get(iPa);
 
-            // Validar si el programa académico ya está registrado por código SNIES
-            boolean codigo_asignaturaRegistrado = false;
-            for (Asignatura Cod_asignaturaValidar : pa.getListaMaterias()) {
-                if (Cod_asignaturaValidar.getCodigo_asignatura().equalsIgnoreCase(codigoAsignatura)) {
-                    System.out.println("La asignatura con este código ya está registrada.");
-                    codigo_asignaturaRegistrado = true;
-                    break;
-                }
-            }
-            if (!codigo_asignaturaRegistrado) {
-                pa.getListaMaterias().add(new Asignatura(nombresAsignatura, codigoAsignatura, creditosAsignatura));
-                System.out.println("Asignatura creada exitosamente.");
-                break; // Salir del bucle en caso de éxito
-            }
+        String nombresAsignatura = view.readStringText("Nombre Asignatura: ");                //valida tipo dato (solo texto)y entrada no vacía
+        String codigoAsignatura = view.readString("Código Asignatura: ");
+        String creditosAsignatura = view.readString("Creditos Asignatura: ");
+
+        try {
+            pa.crearAsignatura(nombresAsignatura, codigoAsignatura, creditosAsignatura);
+            view.showMessage("Asignatura creada con exito.");
+        } catch (Exception e) {
+            view.showMessage(e.toString());
         }
-        view.showMessage("Asignatura registrado exitosamente.");
     }
 
     public void modificarAsignatura() {
@@ -329,39 +288,89 @@ public class Presenter {
         }
 
         view.showMessage(u.verProgramasAcademicos());
-        int indexPr = view.readIndex("Digite el indice del programa academico: ", u.getProgramasAcademicos().size());
+        int indexPr = view.readIndex("Digite el indice del programa academico donde desea eliminar la asignatura: ", u.getProgramasAcademicos().size());
 
         view.showMessage("=== Asignaturas ===");
         ProgramaAcademico pr = u.getProgramasAcademicos().get(indexPr);
 
         view.showMessage(pr.verAsignaturas());
-
         int indexA = view.readIndex("Ingrese el índice de la asignatura que desea modificar: ", pr.getListaMaterias().size());
-    }
-
-    private void eliminarEstudiante() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        pr.getListaMaterias().remove(indexA);
+        view.showMessage("Asignatura eliminada correctamente.");
     }
 
     private void verAsignaturasRegistradas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        view.showMessage("== Asignaturas Registradas");
+        for (ProgramaAcademico pr : u.getProgramasAcademicos()) {
+            view.showMessage(pr.getNombrePrograma().toUpperCase());
+            for (Asignatura a : pr.getListaMaterias()) {
+                view.showMessage(a.toString());
+            }
+            view.showMessage("");
+        }
     }
 
     private void eliminar_Matricula_Estudiante_programa() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        view.showMessage("== Eliminar Matricula Estudiante ==");
+        
+        if(u.getProgramasAcademicos().isEmpty()) {
+            view.showMessage("No hay Programas Academicos aún.");
+            return;
+        }
+        
+        view.showMessage(u.verProgramasAcademicos());
+        int iPa = view.readIndex("Ingrese el indice de donde quiere quitar la matricula del estudiante: ", u.getProgramasAcademicos().size());
+        ProgramaAcademico pa = u.getProgramasAcademicos().get(iPa);
+        
+        if(pa.getEstudiantesMatriculados().isEmpty()) {
+            view.showMessage("Aún no hay ningun estudiante matriculado.");
+            return;
+        }
+        
+        view.showMessage(pa.verEstudiantesProgramaAcademico());
+        int iEs = view.readIndex("Ingrese el indice del estudiante: ", iPa);
+        pa.getEstudiantesMatriculados().remove(iEs);
     }
 
     private void matricularEstudiante_asigantura() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        view.showMessage("== Matricular Estudiante ==");
+        if(u.getEstudiantes().isEmpty()) {
+            view.showMessage("Primero registra algunos estudiantes.");
+            return;
+        }
+        if(u.getProgramasAcademicos().isEmpty()) {
+            view.showMessage("Aún no existen programas Academicos");
+            return;
+        }
+        view.showMessage(u.verProgramasAcademicos());
+        int iPa = view.readIndex("Ingrese el indice del programa academico en donde desea matricular al estudiante: ", u.getProgramasAcademicos().size());
+        ProgramaAcademico pa = u.getProgramasAcademicos().get(iPa);
+        if(pa.getEstudiantesMatriculados().isEmpty()) {
+            view.showMessage("Primero matricula algunos estudiantes.");
+            return;
+        }
+        view.showMessage(pa.verEstudiantesProgramaAcademico());
+        int iEs = view.readIndex("Ingrese el indice del estudiante que desea matricular: ", pa.getEstudiantesMatriculados().size());
+        view.showMessage(pa.verAsignaturas());
+        int iAs = view.readIndex("Ingrese el indice de la materia: ", pa.getListaMaterias().size());
+        Asignatura a = pa.getListaMaterias().get(iAs);
+        
+        a.getLista_estudiantes_asignatura().add(u.getEstudiantes().get(iEs));
     }
 
     private void verEstudiantesMatriculadosEnAsignatura() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        view.showMessage("== Estudiantes Matriculados Asignatura ==");
+        
+        view.showMessage(u.verProgramasAcademicos());
+        int iPa = view.readIndex("Ingrese el indice del programa academico: ", u.getProgramasAcademicos().size());
+        ProgramaAcademico pa = u.getProgramasAcademicos().get(iPa);
+        
+        view.showMessage(pa.verAsignaturas());
+        
     }
 
     private void eliminarEstudianteDeAsignatura() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }

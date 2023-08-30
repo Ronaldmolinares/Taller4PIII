@@ -62,7 +62,18 @@ public class ProgramaAcademico {
         this.nombrePrograma = nombrePrograma;
     }
     
-    
+    public void crearAsignatura(String nombre, String codigo, String nCreditos) throws Exception {
+        
+        // comprobar si el codigo de la materia ya existe
+        for(Asignatura a: listaMaterias) {
+            if(a.getCodigo_asignatura().equals(codigo)) {
+                throw new Exception("El codigo de la asignatura ya existe.");
+            }
+        }
+        
+        Asignatura nA = new Asignatura(nombre, codigo, nCreditos);
+        this.listaMaterias.add(nA);
+    }
     
     public String verAsignaturas() {
         if(listaMaterias.isEmpty()) {
@@ -75,7 +86,7 @@ public class ProgramaAcademico {
         return str;
     }
     
-    public String verEstudiantesProgramasAcademicos() {
+    public String verEstudiantesProgramaAcademico() {
         String str = "";
         str += "Programa Académico: " + nombrePrograma
                 + ", Estudiantes Matriculados: " + estudiantesMatriculados.size() + "\n";
@@ -86,6 +97,12 @@ public class ProgramaAcademico {
         }
         return str;
     }
+    
+    public String addEstudiate(Estudiante e) {
+        estudiantesMatriculados.add(e);
+        return "Estudiante registrado con exito";
+    }
+            
         @Override
     public String toString() {
         return "ProgramaAcademico{" + "nombrePrograma=" + nombrePrograma + ", codigoSNIES=" + codigoSNIES + ", estudiantesMatriculados=" + estudiantesMatriculados + ", listaMaterias=" + listaMaterias + '}';
