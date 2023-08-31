@@ -38,7 +38,7 @@ public class View {
             if (input.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
                 return input;
             }
-            throw new Exception("Ingrese una direcci√≥n de correo v√°lida. Intente nuevamente.");
+            throw new Exception("Ingrese una direcciÛn de correo v·lida. Intente nuevamente.");
         } catch (Exception e) {
             showMessage(e.toString());
             return readEmail(message);
@@ -146,7 +146,7 @@ public class View {
                     this.showMessage("No se permiten campos vac√≠os. Intente nuevamente.");
                 }
             } catch (IOException | NumberFormatException e) {
-                System.out.println("Error: Ingrese un n√∫mero v√°lido.");
+                System.out.println("Error: Ingrese un n˙mero v·lido.");
             }
         }
         return opcion;

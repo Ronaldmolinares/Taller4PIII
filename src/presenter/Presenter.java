@@ -481,8 +481,9 @@ public class Presenter {
             option = view.leerOpcion(6);
 
             switch (option) {
-                case 1 ->
-                    this.matricularEstudiante();
+                case 1 ->{
+                    view.showMessage(u.verEstudiantesRegistrados());
+                    this.matricularEstudiante();}
                 case 2 ->
                     this.verEstudiantePorPrograma();
                 case 3 ->
