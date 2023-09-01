@@ -72,7 +72,7 @@ public class View {
         try {
             index = readInt(message);
             if (!(index >= 0 && index < maximo)) {
-                throw new Exception("Ãndice no vÃ¡lido. Intente nuevamente.");
+                throw new Exception("Índice no válido. Intente nuevamente.");
             }
             return index;
         } catch (Exception e) {
@@ -82,8 +82,9 @@ public class View {
     }
     
     public void menuEstudiante() {
-        this.showMessage("1. Registrar. ");
-        this.showMessage("2. Matricular. ");
+        this.showMessage("1. Registrar (Ver, registrar, modificar, eliminar) ");
+        this.showMessage("2. Matricular (Programa Academico--Asignatura) ");
+        this.showMessage("0.Salir");
     }
 
     public void menuEstudianteResgitro() {
@@ -96,16 +97,18 @@ public class View {
     }
 
     public void menuEstudianteMatricula() {
+        this.showMessage("==== LISTA MATRICULA===");
         this.showMessage("1. Matricular estudiantes en programa");
-        this.showMessage("2. Ver matricula de estudiantes en programa");
+        this.showMessage("2. Ver estudiantes matriculados en programa");
         this.showMessage("3. Eliminar estudiantes matricualados en programa");
         this.showMessage("4. Matricular estudiantes en asignatura");
-        this.showMessage("5. Ver matricula de estudiantes en asignatura");
+        this.showMessage("5. Ver estudiantes matriculados en asignatura");
         this.showMessage("6. Eliminar estudiantes matricualados en asignatura");
         this.showMessage("0. Salir");
     }
 
     public void menuProgramaAcademico() {
+            this.showMessage("=== LISTA PROGRAMA ACEDEMICO ===");
         this.showMessage("1. Crear programa academico");
         this.showMessage("2. Modificar programa academico");
         this.showMessage("3. Eliminar programa acadademico");
@@ -114,6 +117,7 @@ public class View {
     }
 
     public void menuAsignaturas() {
+            this.showMessage("=== LISTA ASIGNATURA ===");
         this.showMessage("1. Crear asignatura");
         this.showMessage("2. Modificar asignatura");
         this.showMessage("3. Eliminar asignatura");
@@ -122,7 +126,7 @@ public class View {
     }
 
     public void mostrarMenu() {
-        this.showMessage("=== Bienvenido A la UPTC ===");
+        this.showMessage("=== BIENVENIDO A la UPTC ===");
         this.showMessage("1. Estudiantes.");
         this.showMessage("2. Programa Academico.");
         this.showMessage("3. Asignaturas");
@@ -140,13 +144,13 @@ public class View {
                     if (opcion >= 0 && opcion <= max) {
                         break;
                     } else {
-                        this.showMessage("OpciÃ³n no vÃ¡lida. Intente nuevamente.");
+                        this.showMessage("Opción no válida. Intente nuevamente.");
                     }
                 } else {
-                    this.showMessage("No se permiten campos vacÃ­os. Intente nuevamente.");
+                    this.showMessage("No se permiten campos vací­os. Intente nuevamente.");
                 }
             } catch (IOException | NumberFormatException e) {
-                System.out.println("Error: Ingrese un nÃºmero vÃ¡lido.");
+                System.out.println("Error: Ingrese un número válido.");
             }
         }
         return opcion;

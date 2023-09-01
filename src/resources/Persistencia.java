@@ -2,13 +2,12 @@ package resources;
 
 import model.*;
 import view.View;
-
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 
 public class Persistencia {
@@ -16,24 +15,27 @@ public class Persistencia {
     private View view = new View();
     private Universidad uni = new Universidad();
     
-    public void cargarEstudiantesDesdeArchivo(ArrayList<Estudiante> estudiantes, String ruta) {
+    public void cargarEstudiantesDesdeArchivo(List<Estudiante> estudiantes, String ruta) {
         estudiantes.clear(); // Limpiamos la lista actual antes de cargar los datos, asegura que los estudiantes del archivo sean los únicos en la lista después de la carga
-
         try (BufferedReader reader = new BufferedReader(new FileReader(ruta))) {
             // Abre un bloque try-with-resources que se encarga de cerrar automáticamente el BufferedReader al final
             // La clase BufferedReader se utiliza para leer caracteres de un flujo de entrada (archivo)
             String line;
+            
             while ((line = reader.readLine()) != null) {
                 // Lee cada línea del archivo hasta llegar al final
                 String[] parts = line.split(",");              //para dividir una cadena (string) en varias subcadenas (tokens)basadas en un delimitador especificado ","             
                 // Divide la línea en partes utilizando la coma como separador
                 if (parts.length == 3) {
                     // Si la línea se dividió en 4 partes (atributos esperados)
-                    estudiantes.add(new Estudiante(parts[0], parts[1], parts[2]));
+                    Estudiante e =new Estudiante(parts[0],parts[1],parts[2]);
+                    //estudiantes.add(e);
+                    uni.getEstudiantes().add(e);
                     // Crea un nuevo estudiante utilizando las partes y agrega el estudiante a la lista
                 }
             }
             view.showMessage("Datos de estudiantes cargados desde el archivo.");
+            view.showMessage(uni.verEstudiantesRegistrados());
             // Muestra un mensaje indicando que los datos se han cargado exitosamente desde el archivo
             // verEstudiantesRegistrados();  (Este comentario indica que aquí podrías llamar a verEstudiantesRegistrados() si deseas mostrar los estudiantes después de cargarlos)
         } catch (IOException e) {
@@ -50,8 +52,9 @@ public class Persistencia {
             for (Estudiante estudiante : uni.getEstudiantes()) {
                 // Itera sobre la lista de estudiantes para guardar cada uno en el archivo
                 writer.write(
-                        estudiante.getNombresApellidos() + ","
-                        + estudiante.getCodigoEstudiante() + ","
+                        
+                        estudiante.getCodigoEstudiante() + ","
+                        +estudiante.getNombresApellidos() + ","
                         + estudiante.getCorreoElectronico());
                 // Escribe los datos del estudiante en una línea del archivo, separados por comas
                 // Cada estudiante se representa como una LÍNEA en el archivo

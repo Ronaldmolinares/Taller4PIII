@@ -52,11 +52,18 @@ public class Asignatura {
         this.creditos_asignatura = creditos_asignatura;
         this.lista_estudiantes_asignatura = new ArrayList<>(); // Inicialización de la lista
     }
-
-    public String toString(int i) {
+    
+    
+   public String toString(int i) {
         return "Indice: " + i +
                 "Nombre: " + nombre_asignatura + 
                 ", Código: " + codigo_asignatura+
                 ", Créditos Asignatura: " + creditos_asignatura;
+   }
+
+    @Override
+    public String toString() {
+        return "Nombre_Asignatura= " + nombre_asignatura + ", Código_Asignatura= " + codigo_asignatura + ", Creditos_Asignatura= " + creditos_asignatura + ", Lista_estudiantes_Asignatura= " + lista_estudiantes_asignatura;
     }
+    
 }

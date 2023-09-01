@@ -5,10 +5,13 @@ public class Estudiante {
     String codigoEstudiante;
     String correoElectronico;
 
-    public Estudiante(String nombresApellidos, String codigoEstudiante, String correoElectronico) {
+    public Estudiante(String codigoEstudiante, String nombresApellidos, String correoElectronico) {
         this.nombresApellidos = nombresApellidos;
         this.codigoEstudiante = codigoEstudiante;
         this.correoElectronico = correoElectronico;
+    }
+
+    public Estudiante() {
     }
 
     public String getNombresApellidos() {
@@ -36,9 +39,9 @@ public class Estudiante {
     }
         @Override
     public String toString() {
-        return "Nombres y Apellidos: " + nombresApellidos +
-                ", CÃ³digo de Estudiante: " + codigoEstudiante +
-                ", Correo ElectrÃ³nico: " + correoElectronico;
+        return  "Código de Estudiante: " + codigoEstudiante +
+                " , Nombres y Apellidos: " + nombresApellidos +
+                " , Correo Electrónico: " + correoElectronico;
     }
     
 }

@@ -32,7 +32,7 @@ public class Universidad {
             str += ("=== Estudiantes Registrados ===\n");
             int index = 0;
             for (Estudiante estudiante : estudiantes) {                     //bucle for-each que recorre la lista de estudiantes
-                str += ("Índice " + index + ": " + estudiante + "\n");
+                str += ("�ndice " + index + ": " + estudiante + "\n");
                 index++;
             }
         }
@@ -54,7 +54,7 @@ public class Universidad {
                     break;
                 case 2:
                     estudiante.setCodigoEstudiante(nuevo);
-                    str = "codigo del estudiante";
+                    str = "C�digo del estudiante";
                 case 3:
                     estudiante.setCorreoElectronico(nuevo);
                     str = "correo electronico del estudiante";
@@ -66,14 +66,14 @@ public class Universidad {
     }
 
     public String verProgramasAcademicos() {
-        String str = " ";
+        String str = "";
         if (programasAcademicos.isEmpty()) {
-          str = "No hay programas académicos registrados.";
+          str = "No hay programas ac�demicos registrados.";
         } else {
-            System.out.println("=== Programas Académicos Registrados ===");
+            System.out.println("=== Programas Ac�demicos Registrados ===");
             int index = 0;
             for (ProgramaAcademico programa : programasAcademicos) {
-                str += "Índice " + index + ": " + programa;
+                str += "�ndice " + index + ": " + programa;
                 index++;
             }
             str += " "+ "\n";
@@ -86,7 +86,7 @@ public class Universidad {
         if (programasAcademicos.isEmpty()) { // Verifica si la lista de programas académicos está vacía
             str = " No hay programas académicos registrados.";
         } else {
-            str = "=== Estudiantes Matriculados por Programa Académico ===" + "\n";
+            str = "=== Estudiantes Matriculados por Programa Ac�demico ===" + "\n";
             for (ProgramaAcademico programa : programasAcademicos) { // Itera a través de la lista de programas académicos usando un bucle for-each
                 str += "Programa: " + programa.getNombrePrograma(); // Imprime el nombre del programa académico actual
 

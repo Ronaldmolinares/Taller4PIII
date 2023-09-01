@@ -92,7 +92,7 @@ public class ProgramaAcademico {
         String str = "";
         str += "Programa Académico: " + nombrePrograma
                 + ", Estudiantes Matriculados: " + estudiantesMatriculados.size() + "\n";
-        int i = 1;
+        int i = 0;
         for (Estudiante e : estudiantesMatriculados) {
             str += i + ". " + e.getNombresApellidos();
             i++;
@@ -107,7 +107,7 @@ public class ProgramaAcademico {
             
         @Override
     public String toString() {
-        return "ProgramaAcademico{" + "nombrePrograma=" + nombrePrograma + ", codigoSNIES=" + codigoSNIES + ", estudiantesMatriculados=" + estudiantesMatriculados + ", listaMaterias=" + listaMaterias + '}';
+        return "Nombre_Programa= " + nombrePrograma + ", CódigoSNIES= " + codigoSNIES + "\n Estudiantes Matriculados= " + estudiantesMatriculados + "\n Lista de Materias= " + listaMaterias +"\n";
     }
     
        
